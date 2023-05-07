@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registro de llegada de clientes</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		th, td {
+			border: 1px solid black;
+			padding: 8px;
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+	<h1>Registro de llegada de clientes</h1>
+	<form>
+		<label for="hora-llegada">Hora de llegada:</label>
+		<input type="time" id="hora-llegada" name="hora-llegada"><br><br>
+		
+		<label for="horas-rentadas">Horas rentadas:</label>
+		<input type="number" id="horas-rentadas" name="horas-rentadas" min="1" max="24"><br><br>
+		
+		<label for="num-huespedes">Número de huéspedes:</label>
+		<input type="number" id="num-huespedes" name="num-huespedes" min="1"><br><br>
+		
+		<label for="modelo-vehiculo">Modelo del vehículo:</label>
+		<input type="text" id="modelo-vehiculo" name="modelo-vehiculo"><br><br>
+		
+		<input type="submit" value="Registrar llegada">
+	</form>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>Hora de llegada</th>
+				<th>Horas rentadas</th>
+				<th>Número de huéspedes</th>
+				<th>Modelo de vehículo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>12:00 PM</td>
+				<td>4</td>
+				<td>2</td>
+				<td>Honda Civic</td>
+			</tr>
+			<tr>
+				<td>2:30 PM</td>
+				<td>8</td>
+				<td>5</td>
+				<td>Toyota Corolla</td>
+			</tr>
+			<tr>
+				<td>6:45 PM</td>
+				<td>3</td>
+				<td>1</td>
+				<td>Nissan Sentra</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Reservación en línea</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+	<style>
+		body {
+			font-family: 'Montserrat', sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f1f1f1;
+		}
+
+		.container {
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		h1 {
+			text-align: center;
+			font-size: 36px;
+			margin-bottom: 20px;
+		}
+
+		form label {
+			display: block;
+			margin-bottom: 5px;
+			font-size: 18px;
+			font-weight: bold;
+			color: #444;
+		}
+
+		form input,
+		form select {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border-radius: 5px;
+			border: none;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+			font-size: 18px;
+		}
+
+		form input[type="submit"],
+		form input[type="reset"] {
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			font-size: 18px;
+			cursor: pointer;
+			margin-top: 20px;
+		}
+
+		form input[type="submit"]:hover,
+		form input[type="reset"]:hover {
+			background-color: #3e8e41;
+		}
+
+		.btn-reservar {
+			display: inline-block;
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 10px 30px;
+			border: none;
+			border-radius: 5px;
+			font-size: 24px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			text-decoration: none;
+			margin-top: 20px;
+		}
+
+		.btn-reservar:hover {
+			background-color: #3e8e41;
+			transform: translateY(-3px);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Reservación en línea</h1>
+		<form id="reservacionForm">
+			<label for="nombre">Nombre completo:</label>
+			<input type="text" id="nombre" name="nombre" required>
+
+			<label for="telefono">Teléfono:</label>
+			<input type="tel" id="telefono" name="telefono" required>
+
+			<label for="habitacion">Tipo de habitación:</label>
+			<select id="habitacion" name="habitacion" required>
+				<option value="">Seleccione una opción</option>
+				<option value="2">2 horas - $300</option>
+				<option value="4">4 horas - $400</option>
+				<option value="12">12 horas - $500</option>
+				<option value="24">24 horas - $700</option>
+			</select>
+
+			<label for="checkin">Fecha y hora de llegada</label>
+			<input type="datetime-local" id="checkin" name="checkin" required min="now">
+
+			<input type="submit" value="Reservar" class="btn-reservar">
+		</form>
+	</div>
+	<script>
+		var fechaHoraActual = new Date();
+		fechaHoraActual.setMinutes(fechaHoraActual.getMinutes() + 1);
+		var fechaHoraMinima = fechaHoraActual.toISOString().slice(0, 16);
+
+		// Establecer el valor mínimo del elemento de entrada de fecha y hora
+		// esto para que no se hagan reservaciones en días pasados
+		document.getElementById("checkin").setAttribute("min", fechaHoraMinima);
+	</script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="/Frontend/scripts/Reservacion.js"></script>
+	<script src="/Frontend/scripts/ConexionApiReservaciones.js"></script>
+</body>
+
+</html>
