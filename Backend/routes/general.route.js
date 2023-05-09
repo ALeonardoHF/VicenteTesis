@@ -17,7 +17,7 @@ module.exports = app => {
   // router.get("/published", empleados.findAllPublished);
 
   // Retrieve a single Tutorial with id
-  router.get("/empleados/:nombre", empleados.findOne);
+  router.post("/empleados/find/", empleados.findOne);
 
   // Update a Tutorial with id
   router.put("/empleados/:id", empleados.update);

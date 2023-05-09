@@ -15,6 +15,7 @@ exports.create = (req, res) => {
   // Create a Tutorial
   const empleado = {
     Nombre: req.body.nombre,
+    Apellido: req.body.apellido,
     Rol: req.body.rol
   };
 
@@ -51,7 +52,7 @@ exports.create = (req, res) => {
 
 // Find a single Tutorial with an id
 exports.findOne = (req, res) => {
-  const nombre = req.params.nombre;
+  const nombre = req.body.nombre;
 
   Empleado.findOne({ where: { nombre: nombre } })
     .then(data => {
