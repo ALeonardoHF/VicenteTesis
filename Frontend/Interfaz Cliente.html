@@ -15,6 +15,7 @@
 		.container {
 			max-width: 600px;
 			margin: 0 auto;
+			margin-top: 20px;
 			padding: 20px;
 			background-color: #fff;
 			border-radius: 10px;
@@ -83,12 +84,41 @@
 			background-color: #3e8e41;
 			transform: translateY(-3px);
 		}
+
+		.verificacionDiv {
+			margin-top: 30px;
+			display: none;
+			margin-bottom: 30px;
+		}
+
+		p {
+			text-align: center;
+		}
+
+		.codAu {
+			color: red;
+		}
+
+		.code {
+			font-size: x-large;
+			color: #3e8e41;
+			font-weight: bold;
+		}
+
+		.inputVerificacion {
+			display: flex;
+			align-content: center;
+			justify-content: center;
+			font-size: larger;
+		}
 	</style>
 </head>
 
 <body>
 	<div class="container">
 		<h1>Reservación en línea</h1>
+		<!-- <p>*** Las reservaciones por seguridad se tienen que realizar</p>
+		<p>con 10 horas de anticipación. ***</p> -->
 		<form id="reservacionForm">
 			<label for="nombre">Nombre completo:</label>
 			<input type="text" id="nombre" name="nombre" required>
@@ -105,23 +135,50 @@
 				<option value="24">24 horas - $700</option>
 			</select>
 
+			<label for="huespedes">Cantidad de huéspedes</label>
+			<input type="number" id="huespedes" name="huespedes" required min="0">
+			<p style="color: red;">*** Habitaciones para 2 personas, cada persona es un monto de $100.00 mxn extras ***
+			</p>
+
 			<label for="checkin">Fecha y hora de llegada</label>
-			<input type="datetime-local" id="checkin" name="checkin" required min="now">
+			<input type="datetime-local" id="checkin" name="checkin" required>
 
 			<input type="submit" value="Reservar" class="btn-reservar">
 		</form>
 	</div>
-	<script>
-		var fechaHoraActual = new Date();
-		fechaHoraActual.setMinutes(fechaHoraActual.getMinutes() + 1);
-		var fechaHoraMinima = fechaHoraActual.toISOString().slice(0, 16);
 
-		// Establecer el valor mínimo del elemento de entrada de fecha y hora
-		// esto para que no se hagan reservaciones en días pasados
-		document.getElementById("checkin").setAttribute("min", fechaHoraMinima);
+	<div class="container verificacionDiv" id="verificacionDiv">
+		<h1>Código de verificación</h1>
+		<p class="codAu">Por favor guarda el código ya que lo necesitarás</p>
+		<p class="codAu">para garantizar el acceso a la reservación en VicMar</p>
+
+		<div class="container inputVerificacion">
+			<p id="codigoVerificacion" class="code"></p>
+		</div>
+	</div>
+	<script>
+		// Obtener la hora actual
+		var fechaHoraActual = new Date();
+
+		// Convertir la hora a UTC
+		var fechaHoraUTC = new Date(fechaHoraActual.getTime() - fechaHoraActual.getTimezoneOffset() * 60000);
+
+		// Obtener los componentes de fecha y hora en formato UTC
+		var anio = fechaHoraUTC.getUTCFullYear();
+		var mes = ('0' + (fechaHoraUTC.getUTCMonth() + 1)).slice(-2);
+		var dia = ('0' + fechaHoraUTC.getUTCDate()).slice(-2);
+		var hora = ('0' + fechaHoraUTC.getUTCHours()).slice(-2);
+		var minutos = ('0' + fechaHoraUTC.getUTCMinutes()).slice(-2);
+
+		// Generar la cadena de fecha y hora en formato adecuado
+		var fechaHoraMinima = anio + '-' + mes + '-' + dia + 'T' + hora + ':' + minutos;
+
+		// Establecer el valor mínimo en el campo de entrada datetime
+		document.getElementById('checkin').setAttribute('min', fechaHoraMinima);
+
 	</script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script src="/Frontend/scripts/Reservacion.js"></script>
+	<!-- <script src="/Frontend/scripts/Reservacion.js"></script> -->
 	<script src="/Frontend/scripts/ConexionApiReservaciones.js"></script>
 </body>
 

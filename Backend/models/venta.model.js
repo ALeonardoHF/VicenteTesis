@@ -13,17 +13,14 @@ module.exports = (sequelize, Sequelize) => {
       Articulo: {
         type: Sequelize.STRING,
         allowNull: false
-        
       },
       Tipo_articulo: {
         type: Sequelize.STRING,
         allowNull: false
-        
       },
       Precio: {
         type: Sequelize.FLOAT,
         allowNull: false
-        
       },
       Cantidad: {
         type: Sequelize.INTEGER,

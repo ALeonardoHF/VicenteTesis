@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Botones en HTML</title>
 	<style>
@@ -7,7 +8,7 @@
 			background-color: #F7F7F7;
 			font-family: Arial, sans-serif;
 		}
-		
+
 		.container {
 			position: absolute;
 			top: 50%;
@@ -21,13 +22,13 @@
 			flex-direction: column;
 			align-items: center;
 		}
-		
+
 		h1 {
 			font-size: 28px;
 			margin-bottom: 30px;
 			text-align: center;
 		}
-		
+
 		.btn {
 			background-color: #4CAF50;
 			color: white;
@@ -41,21 +42,23 @@
 			border-radius: 5px;
 			transition: transform 0.2s ease-out;
 		}
-		
+
 		.btn:hover {
 			background-color: #3e8e41;
 			box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
 			transform: scale(1.1);
 		}
-		
+
 		.btn:active {
 			transform: scale(0.95);
 		}
 	</style>
 </head>
+
 <body>
+		<button onclick="logOut()">Cerrar Sesión</button>
 	<div class="container">
-		<h1>Encuadre de botones</h1>
+		<h1>Portal Empleados</h1>
 		<button class="btn" id="reservaciones" onclick="checkValue(event)">Reservaciones</button>
 		<button class="btn" id="ventas" onclick="checkValue(event)">Ventas</button>
 		<button class="btn" id="inventario" onclick="checkValue(event)">Inventario</button>
@@ -65,24 +68,39 @@
 
 
 	<script>
-		function checkValue(event) {
-			const bId = event.target.id;
-			switch (bId) {
-			case 'reservaciones':
-			// TODO
-			// window.location.href="";
-				break;
-			case 'ventas':
-			window.location.href="./Punto de venta.html";
-			break;
-			case 'inventario':
-			window.location.href="./Inventario.html";
-			break;
-			case 'buscador':
-			window.location.href="./Buscador.html";
-			break;
+		if (localStorage.getItem("user") && localStorage.getItem("login")) {
+			function checkValue(event) {
+				const bId = event.target.id;
+				switch (bId) {
+					case 'reservaciones':
+						window.location.href = "./Reservaciones_Empleado.html";
+						break;
+					case 'ventas':
+						window.location.href = "./Punto de venta.html";
+						break;
+					case 'inventario':
+						window.location.href = "./InventarioEmpleado.html";
+						break;
+					case 'buscador':
+						window.location.href = "./Buscador.html";
+						break;
+				}
+			}
+		} else {
+			redirectToNewPage();
 		}
+
+		function redirectToNewPage() {
+			window.location.href = "/Frontend/Log In Empleado.html";
+
+		}
+
+		function logOut() {
+			localStorage.removeItem("user");
+			localStorage.removeItem("login");
+			window.location.reload();
 		}
 	</script>
 </body>
+
 </html>

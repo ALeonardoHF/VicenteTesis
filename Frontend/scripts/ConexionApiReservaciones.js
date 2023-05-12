@@ -1,4 +1,7 @@
 const form = document.getElementById('reservacionForm');
+
+var verificacionDiv = document.getElementById('verificacionDiv');
+
 form.addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -7,10 +10,18 @@ form.addEventListener('submit', function (event) {
     const telefono = document.getElementById('telefono').value;
     const habitacion = document.getElementById('habitacion').value;
     const checkin = document.getElementById('checkin').value;
+    const huespedes = document.getElementById('huespedes').value;
     var auxCheckIn = new Date(checkin);
     let checkOut = auxCheckIn.setHours(auxCheckIn.getHours() + parseInt(habitacion));
+    console.log('checkOut :>> ', checkOut);
+    console.log('auxCheckIn :>> ', auxCheckIn);
+    console.log('checkin :>> ', checkin);
+    console.log('habitacion :>> ', parseInt(habitacion));
     let precio;
 
+    // obtener de localstorage el id del cliente
+    const cliente = localStorage.getItem("user");
+    const clienteJSON = JSON.parse(cliente);
 
     switch (habitacion) {
         case "2":
@@ -27,31 +38,48 @@ form.addEventListener('submit', function (event) {
             break;
     }
 
-    // console.log('checkin :>> ', checkin);
-    // console.log('auxCheckIn :>> ', auxCheckIn);
-    console.log('checkOut :>> ', new Date(checkOut));
+    if(huespedes > 2) {
+        let hExtras = huespedes - 2;
+        precio = precio + (hExtras * 100);
+    }
+
     console.log('precio :>> ', precio);
-    // console.log('auxCheckIn :>> ', typeof auxCheckIn);
-    // console.log('auxCheckIn :>> ', auxCheckIn instanceof Date);
-
-
-    // console.log(producto);
-    // console.log(cantidad);
-    // console.log(auxPrecio);
-    // console.log(auxVenta);
 
     // Realizar la petición a través de Axios
-    //   axios.post('http://localhost:3002/api/inventarios/', {
-    //     nombre: producto,
-    //     precio: auxPrecio,
-    //     cantidad: cantidad,
-    //     venta: auxVenta
-    //   })
-    //     .then(function (response) {
-    //       // console.log(response);
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    //     location.reload();
+      axios.post('http://localhost:3002/api/reservaciones/', {
+        nombre: nombre,
+        telefono: telefono,
+        habitacion: habitacion,
+        precio: precio,
+        checkin: checkin,
+        checkout: checkOut,
+        clienteId: clienteJSON.idCliente,
+        huespedes: huespedes
+      })
+        .then(function (response) {
+          console.log(response);
+          if(verificar(response)) {
+            verificacionDiv.style.display = "block";
+            document.getElementById('codigoVerificacion').textContent = response.data.CodigoAuth;
+        } else {
+            verificacionDiv.style.display = "none";
+        }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        form.reset();
+        // recarga la página, no es necesario en esta sección
+        // location.reload();
 });
+
+function verificar(response) {
+    // Comprobar alguna condición
+    if (response.status == 200) {
+      
+      return true;
+    } else {
+      
+      return false;
+    }
+  }

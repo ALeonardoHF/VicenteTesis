@@ -38,10 +38,10 @@ update inventarios set Precio = null where Nombre = 'Camara Seguridad';
 
 -- ALTER TABLE empleado AUTO_INCREMENT=1;
 
-Select * from cliente;
+Select * from clientes;
 Select * from empleados;
 Select * from inventarios;
-Select * from reservaciones;
+Select * from reservacions;
 Select * from venta;
 Select * from agendas;
 

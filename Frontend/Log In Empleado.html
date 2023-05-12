@@ -52,7 +52,7 @@
       color: #333;
     }
     
-    input[type="submit"] {
+    button[type="submit"] {
       background-color: #4CAF50;
       color: white;
       padding: 12px 20px;
@@ -64,7 +64,7 @@
       transition: all 0.2s ease-in-out;
     }
     
-    input[type="submit"]:hover {
+    button[type="submit"]:hover {
       background-color: #43A047;
     }
     
@@ -92,11 +92,17 @@
   <div class="back-button">
     <button onclick="window.history.back()">Regresar</button>
   </div>
-  <form method="">
+  <form id="loginForm">
     <h2>Iniciar Sesión - Empleados</h2>
     <label for="employee-number">Número de empleado:</label>
-    <input type="text" id="employee-number" name="employee-number" maxlength="5" required>
+    <input type="text" id="employee-number" name="employee-number" maxlength="6" minlength="6" required>
     <label for="password">Contraseña:</label>
     <input type="password" id="password" name="password" required>
-    <input type="submit" value="Iniciar Sesion" />
+    <button type="submit">Iniciar Sesion</button>
   </form>
+</body>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/Frontend/scripts/ConexionApiLogin.js"></script>
+
+</html>

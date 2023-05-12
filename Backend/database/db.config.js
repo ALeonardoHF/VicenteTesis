@@ -1,3 +1,5 @@
+const moment = require('moment-timezone');
+
 module.exports = {
     host: 'localhost',
     user:'vicmar',
@@ -5,5 +7,6 @@ module.exports = {
     database: 'test',
     waitForConnections:true,
     connectionLimit:10,
-    queueLimit:0
+    queueLimit:0,
+    timezone: moment.tz('America/Chihuahua').format('Z')
 };

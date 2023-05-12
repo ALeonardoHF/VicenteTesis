@@ -12,9 +12,18 @@
         border: 1px solid black;
         padding: 10px;
       }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        
+      }
     </style>
   </head>
   <body>
+    <div class="navbar">
+      <button onclick="redirectToMenu()">Menu</button>
+      <button id="cerrarSesion" onclick="logOut()">Cerrar Sesión</button>
+    </div>
     <h1>Punto de venta - Tienda de souvenirs</h1>
     <form id="ventaForm">
       <label for="nombre">Nombre del producto:</label>

@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `test`.`Reservaciones` (
   `codigo_auth` varchar(10) NOT NULL,
   `Cliente_idCliente` varchar(40) NOT NULL,
   PRIMARY KEY (`idReservaciones`, `Cliente_idCliente`),
-  INDEX `fk_Reservaciones_Cliente1_idx` (`Cliente_idCliente` ASC) VISIBLE,
+  INDEX `fk_Reservaciones_Cliente1_idx` (`Cli ente` ASC) VISIBLE,
   CONSTRAINT `fk_Reservaciones_Cliente1`
     FOREIGN KEY (`Cliente_idCliente`)
     REFERENCES `test`.`Cliente` (`idCliente`)

@@ -24,5 +24,6 @@ db.agenda = require('./agenda.model.js')(sequelize, Sequelize);
 db.venta = require('./venta.model.js')(sequelize, Sequelize);
 db.reservacion = require('./reservacion.model.js')(sequelize, Sequelize);
 db.registro = require('./registro.model.js')(sequelize, Sequelize);
+db.cliente = require('./cliente.model.js')(sequelize, Sequelize);
 
 module.exports = db;

@@ -11,16 +11,16 @@ module.exports = app => {
   router.post("/empleados/", empleados.create);
 
   // Retrieve all Tutorials
-  // router.get("/", empleados.findAll);
+  router.get("/empleados/", empleados.findAll);
 
   // Retrieve all published Tutorials
   // router.get("/published", empleados.findAllPublished);
 
   // Retrieve a single Tutorial with id
-  router.post("/empleados/find/", empleados.findOne);
+  // router.post("/empleados/find/", empleados.findOne);
 
   // Update a Tutorial with id
-  router.put("/empleados/:id", empleados.update);
+  // router.put("/empleados/:id", empleados.update);
 
   // Delete a Tutorial with id
   // router.delete("/empleados/:id", empleados.delete);
@@ -41,7 +41,7 @@ module.exports = app => {
   router.get("/inventarios/", inventarios.findAll);
 
   // Retrieve all published Tutorials
-  // router.get("/published", empleados.findAllPublished);
+  // router.get("/published", inventarios.findAll);
 
   // Retrieve a single Tutorial with id
   // router.get("/inventarios/:nombre", inventarios.findOne);
@@ -94,6 +94,45 @@ module.exports = app => {
 
   // Retrieve all Tutorials
   router.get("/ventas/", ventas.findAll);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  // Cliente
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
+  const clientes = require("../controllers/cliente.controller.js");
+
+  // Create a new Tutorial
+  router.post("/clientes/", clientes.create);
+
+  // Retrieve all Tutorials
+  router.get("/clientes/:nombre", clientes.findOne);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  // Reservaciones
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
+  const reservaciones = require("../controllers/reservacion.controller.js");
+
+  // Create a new Tutorial
+  router.post("/reservaciones/", reservaciones.create);
+
+  // Retrieve all Reservaciones Cliente
+  router.get("/reservaciones/:id", reservaciones.findAllClient);
+
+  // Retrieve all Reservaciones Empleado
+  router.get("/reservaciones", reservaciones.findAllEmpleado);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  // Reservaciones
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
+  const authLogin = require("../controllers/auth.controller.js");
+
+  // Create a new Tutorial
+  router.post("/auth/login", authLogin.login);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////
 
   app.use('/api', router);
 };

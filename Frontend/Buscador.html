@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Lista de Contactos</title>
+	<style>
+		.navbar {
+			display: flex;
+			justify-content: space-between;
+			
+		  }
+	</style>
 </head>
+
 <body>
+	<div class="navbar">
+		<button onclick="redirectToMenu()">Menu</button>
+		<button onclick="logOut()">Cerrar Sesión</button>
+	</div>
 	<h1>Lista de Contactos</h1>
-	
+
 	<!-- Buscador -->
-	<input type="text" id="buscador" onkeyup="buscar()" placeholder="Buscar por nombre, profesión, información relevante o número de teléfono">
+	<input type="text" id="buscador" onkeyup="buscar()"
+		placeholder="Buscar por nombre, profesión, información relevante o número de teléfono">
 
 	<!-- Tabla de contactos -->
 	<table id="tablaContactos" border="1">
@@ -20,7 +34,7 @@
 			</tr>
 		</thead>
 		<tbody id="tabla-agenda">
-			
+
 		</tbody>
 	</table>
 
@@ -72,4 +86,5 @@
 		}
 	</script>
 </body>
+
 </html>
