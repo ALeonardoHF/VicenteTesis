@@ -159,6 +159,12 @@
                 this.style.backgroundColor = "#45a049";
             });
         });
+
+        // Verifica si la variable logIn no existe en el localStorage
+		if (!localStorage.getItem('login')) {
+			// Redirige al usuario a una página de inicio de sesión o a una página de acceso no autorizado
+			window.location.href = "/Frontend/Home.html";
+		}
     </script>
 </body>
 

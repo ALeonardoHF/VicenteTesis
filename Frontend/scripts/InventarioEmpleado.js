@@ -5,38 +5,41 @@
 
 const tabla = document.querySelector("#tabla-inventario");
 
-if (localStorage.getItem("user") && localStorage.getItem("login")) {
-    axios.get('http://localhost:3002/api/inventarios/')
-        .then(function (response) {
-            response.data.forEach(function (dato) {
-                const fila = document.createElement("tr");
+if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
+    redirectClient();
+} else {
+    if (localStorage.getItem("user") && localStorage.getItem("login")) {
+        axios.get('http://localhost:3002/api/inventarios/')
+            .then(function (response) {
+                response.data.forEach(function (dato) {
+                    const fila = document.createElement("tr");
 
-                if (dato.Precio == null) {
-                    dato.Precio = 'Inventario Interno';
-                }
+                    if (dato.Precio == null) {
+                        dato.Precio = 'Inventario Interno';
+                    }
 
-                fila.innerHTML = `
+                    fila.innerHTML = `
             <td>${dato.Nombre}</td>
             <td>${dato.Cantidad}</td>
             <td>${dato.Precio}</td>
             `;
-                tabla.appendChild(fila);
+                    tabla.appendChild(fila);
 
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
             });
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-} else {
-    redirectToNewPage();
+    } else {
+        redirectToNewPage();
+    }
 }
-
 
 
 function redirectToNewPage() {
     logOut();
     window.location.href = "/Frontend/Log In Empleado.html";
-    
+
 
 }
 
@@ -44,6 +47,12 @@ function logOut() {
     localStorage.removeItem("user");
     localStorage.removeItem("login");
     window.location.reload();
+}
+
+function logOutCliente() {
+    localStorage.removeItem("cliente");
+    localStorage.removeItem("loginCliente");
+    // window.location.reload();
 }
 
 function reload() {
@@ -63,5 +72,13 @@ function redirectToMenu() {
     } else {
         // Repetir la misma acción
         redirectToNewPage();
+    }
+}
+
+function redirectClient() {
+    if (localStorage.getItem("cliente")) {
+        // Cambiar la ubicación de la página actual a la nueva página
+        logOutCliente();
+        window.location.href = "/Frontend/Log_In_Cliente.html";
     }
 }

@@ -2,21 +2,33 @@ const db = require("../models");
 
 module.exports = (sequelize, Sequelize) => {
     const Registro = sequelize.define("registro", {
-        idRegistro: {
+        idReservacion: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        Llegada: {
-            type: Sequelize.TIME,
+        CheckIn: {
+            type: Sequelize.DATE,
             allowNull: false
         },
-        Salida: {
-            type: Sequelize.TIME,
+        CheckOut: {
+            type: Sequelize.DATE,
             allowNull: false
         },
         TiempoEstancia: {
             type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        Precio: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        CodigoAuth: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        Telefono: {
+            type: Sequelize.STRING,
             allowNull: false
         },
         Huespedes: {
@@ -26,10 +38,20 @@ module.exports = (sequelize, Sequelize) => {
         ModeloAuto: {
             type: Sequelize.STRING,
             allowNull: false
-        }
+        },
+        Matricula: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        TipoReservacion: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        NumHabitacion: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
     }, { sequelize, timestamps: false });
-
-    // Registro.belongsTo(db.cliente, {foreignKey: 'idCliente'});
 
     return Registro;
 };

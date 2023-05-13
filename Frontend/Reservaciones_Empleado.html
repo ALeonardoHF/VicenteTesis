@@ -41,7 +41,7 @@
         <button onclick="logOut()">Cerrar Sesión</button>
     </div>
 
-    <h1>Sistema de Reservaciones</h1>
+    <h1>Sistema de Reservaciones en Linea</h1>
 
     <table border="1">
         <thead>
@@ -60,8 +60,40 @@
             <!-- Se insetaran los registros de la base de datos dinamicamente -->
         </tbody>
     </table>
+
+    <h1>Sistema de Reservaciones Locales VicMar</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Tiempo Estancia</th>
+                <th>Codigo Autorización</th>
+                <th>Teléfono</th>
+                <th>Huespedes</th>
+                <th>Precio</th>
+                <th>Reservación Válida</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-registros">
+            <!-- Se insetaran los registros de la base de datos dinamicamente -->
+        </tbody>
+    </table>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/Frontend/scripts/ReservacionEmpleados.js"></script>
+    <script>
+        // Verifica si la variable logIn no existe en el localStorage
+        if (!localStorage.getItem('login')) {
+                // Redirige al usuario a una página de inicio de sesión o a una página de acceso no autorizado
+                localStorage.removeItem("user");
+                localStorage.removeItem("login");
+                localStorage.removeItem("cliente");
+                localStorage.removeItem("loginCliente");
+                window.location.href = "/Frontend/Home.html";
+            }
+      </script>
+    <!-- <script src="/Frontend/scripts/RegistrosEmpleados.js"></script> -->
     <!-- <script src="/Frontend/scripts/ConexionApiReservaciones.js"></script> -->
 </body>
 

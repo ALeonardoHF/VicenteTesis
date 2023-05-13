@@ -42,6 +42,7 @@ Select * from clientes;
 Select * from empleados;
 Select * from inventarios;
 Select * from reservacions;
+Select * from registros;
 Select * from venta;
 Select * from agendas;
 

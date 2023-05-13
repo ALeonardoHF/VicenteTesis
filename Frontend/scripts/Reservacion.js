@@ -4,7 +4,7 @@
 // y no puedas agregar negativos a cantidad y a precio
 
 const tabla = document.querySelector("#tabla-reservaciones");
-const cliente = localStorage.getItem("user");
+const cliente = localStorage.getItem("cliente");
 const clienteJSON = JSON.parse(cliente);
 
 axios.get(`http://localhost:3002/api/reservaciones/${clienteJSON.idCliente}`)
@@ -35,7 +35,7 @@ axios.get(`http://localhost:3002/api/reservaciones/${clienteJSON.idCliente}`)
             const fechaHoy = new Date();
             let caducidad;
 
-            if(fechaHoy > fechaOut) {
+            if (fechaHoy > fechaOut) {
                 caducidad = 'Vencida'
             } else {
                 caducidad = 'Válida'
@@ -53,21 +53,21 @@ axios.get(`http://localhost:3002/api/reservaciones/${clienteJSON.idCliente}`)
             <td>$ ${dato.Precio}</td>
             <td>${caducidad}</td>
             `;
-            
+
             tabla.appendChild(fila);
-            
+
         });
     })
     .catch(function (error) {
         console.log(error);
     });
 
+    function redirectToRegistration() {
+        window.location.href = "/Frontend/Interfaz Cliente.html";
+    }
 
-
-        // <th>Check In</th>
-        // <th>Check Out</th>
-        // <th>Tiempo Estancia</th>
-        // <th>Precio</th>
-        // <th>Codigo Autorización</th>
-        // <th>Teléfono</th>
-        // <th>Huespedes</th>
+    function logOutCliente() {
+        localStorage.removeItem("cliente");
+        localStorage.removeItem("loginCliente");
+        window.location.href = "/Frontend/Log_In_Cliente.html";
+    }

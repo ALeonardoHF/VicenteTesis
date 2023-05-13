@@ -27,10 +27,6 @@ form.addEventListener('submit', function (event) {
     location.reload();
 });
 
-function redirectToNewPage() {
-  window.location.href = "/Frontend/Log In Empleado.html";
-}
-
 function redirectToMenu() {
   const empleado = localStorage.getItem("user");
   const empleadoJSON = JSON.parse(empleado);
@@ -45,10 +41,4 @@ function redirectToMenu() {
       // Repetir la misma acción
       redirectToNewPage();
   }
-}
-
-function logOut() {
-  localStorage.removeItem("user");
-  localStorage.removeItem("login");
-  window.location.reload();
 }

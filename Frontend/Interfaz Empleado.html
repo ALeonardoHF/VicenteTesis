@@ -59,6 +59,7 @@
 		<button onclick="logOut()">Cerrar Sesión</button>
 	<div class="container">
 		<h1>Portal Empleados</h1>
+		<button class="btn" id="registros" onclick="checkValue(event)">Reservación VicMar</button>
 		<button class="btn" id="reservaciones" onclick="checkValue(event)">Reservaciones</button>
 		<button class="btn" id="ventas" onclick="checkValue(event)">Ventas</button>
 		<button class="btn" id="inventario" onclick="checkValue(event)">Inventario</button>
@@ -72,6 +73,9 @@
 			function checkValue(event) {
 				const bId = event.target.id;
 				switch (bId) {
+					case 'registros':
+						window.location.href = "./Registros.html";
+						break;
 					case 'reservaciones':
 						window.location.href = "./Reservaciones_Empleado.html";
 						break;
@@ -99,6 +103,12 @@
 			localStorage.removeItem("user");
 			localStorage.removeItem("login");
 			window.location.reload();
+		}
+
+		// Verifica si la variable logIn no existe en el localStorage
+		if (!localStorage.getItem('login')) {
+			// Redirige al usuario a una página de inicio de sesión o a una página de acceso no autorizado
+			window.location.href = "/Frontend/Home.html";
 		}
 	</script>
 </body>

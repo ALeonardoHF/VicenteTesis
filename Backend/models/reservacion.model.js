@@ -35,7 +35,23 @@ module.exports = (sequelize, Sequelize) => {
         Huespedes: {
             type: Sequelize.INTEGER,
             allowNull: false
-        }
+        },
+        ModeloAuto: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        Matricula: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        TipoReservacion: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        NumHabitacion: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
     }, { sequelize, timestamps: false });
 
     const Cliente = sequelize.define("cliente", {

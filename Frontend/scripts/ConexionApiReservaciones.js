@@ -20,7 +20,7 @@ form.addEventListener('submit', function (event) {
     let precio;
 
     // obtener de localstorage el id del cliente
-    const cliente = localStorage.getItem("user");
+    const cliente = localStorage.getItem("cliente");
     const clienteJSON = JSON.parse(cliente);
 
     switch (habitacion) {
@@ -83,3 +83,13 @@ function verificar(response) {
       return false;
     }
   }
+
+function redirectClientReservations() {
+  window.location.href = "/Frontend/Reservaciones_Cliente.html";
+}
+
+function logOutCliente() {
+  localStorage.removeItem("cliente");
+  localStorage.removeItem("loginCliente");
+  window.location.href = "/Frontend/Log_In_Cliente.html";
+}

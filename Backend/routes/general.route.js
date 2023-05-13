@@ -119,17 +119,32 @@ module.exports = app => {
   // Retrieve all Reservaciones Cliente
   router.get("/reservaciones/:id", reservaciones.findAllClient);
 
-  // Retrieve all Reservaciones Empleado
+  // Retrieve all Reservaciones en linea Empleado
   router.get("/reservaciones", reservaciones.findAllEmpleado);
 
   //////////////////////////////////////////////////////////////////////////////////////////////
-  // Reservaciones
+  // Registros
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
+  const registros = require("../controllers/registro.controller.js");
+
+  // Crear Registro Local
+  router.post("/registros/local", registros.crearRegistro);
+
+  // Retrieve all Reservaciones locales Empleado
+  router.get("/registros/local", registros.findAll);
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+  // Login
   //////////////////////////////////////////////////////////////////////////////////////////////
 
   const authLogin = require("../controllers/auth.controller.js");
 
-  // Create a new Tutorial
+  // Login Empleados
   router.post("/auth/login", authLogin.login);
+
+  // Login Clientes
+  router.post("/auth/login/cliente", authLogin.loginCliente);
 
   //////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////

@@ -6,32 +6,36 @@
 const tabla = document.querySelector("#tabla-inventario");
 const empleado = localStorage.getItem("user");
 const empleadoJSON = JSON.parse(empleado);
-if (localStorage.getItem("user") && localStorage.getItem("login") && empleadoJSON.Rol === "Administrador") {
-    axios.get('http://localhost:3002/api/inventarios/')
-        .then(function (response) {
-            response.data.forEach(function (dato) {
-                const fila = document.createElement("tr");
 
-                if (dato.Precio == null) {
-                    dato.Precio = 'Inventario Interno';
-                }
+if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
+    redirectClient();
+} else {
+    if (localStorage.getItem("user") && localStorage.getItem("login") && empleadoJSON.Rol === "Administrador") {
+        axios.get('http://localhost:3002/api/inventarios/')
+            .then(function (response) {
+                response.data.forEach(function (dato) {
+                    const fila = document.createElement("tr");
 
-                fila.innerHTML = `
+                    if (dato.Precio == null) {
+                        dato.Precio = 'Inventario Interno';
+                    }
+
+                    fila.innerHTML = `
             <td>${dato.Nombre}</td>
             <td>${dato.Cantidad}</td>
             <td>${dato.Precio}</td>
             `;
-                tabla.appendChild(fila);
+                    tabla.appendChild(fila);
 
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
             });
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-} else {
-    redirectToNewPage();
+    } else {
+        redirectToNewPage();
+    }
 }
-
 
 
 function redirectToNewPage() {
@@ -55,8 +59,22 @@ function redirectToMenu() {
     }
 }
 
+function redirectClient() {
+    if (localStorage.getItem("cliente")) {
+        // Cambiar la ubicación de la página actual a la nueva página
+        logOutCliente();
+        window.location.href = "/Frontend/Log_In_Cliente.html";
+    }
+}
+
 function logOut() {
     localStorage.removeItem("user");
     localStorage.removeItem("login");
-    window.location.reload();
+    // window.location.reload();
+}
+
+function logOutCliente() {
+    localStorage.removeItem("cliente");
+    localStorage.removeItem("loginCliente");
+    // window.location.reload();
 }

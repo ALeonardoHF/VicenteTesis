@@ -13,7 +13,7 @@ form.addEventListener('submit', function (event) {
     console.log(password);
     console.log(confirmPassword);
 
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
         alert("El password debe coincidir.!");
         return;
     }
@@ -25,10 +25,7 @@ form.addEventListener('submit', function (event) {
         password: password
     })
         .then(function (response) {
-            if (response.data.msg == "Ok" && response.status == 200) {
-                // Guardar la información del usuario en el localStorage
-                redirectToNewPage();   
-            }
+            redirectToLoginCliente();
         })
         .catch(function (error) {
             console.log(error);
@@ -38,13 +35,6 @@ form.addEventListener('submit', function (event) {
     // location.reload();
 });
 
-function redirectToNewPage() {
-    // Comprobar si se ha producido la condición
-    if (localStorage.getItem("user")) {
-      // Cambiar la ubicación de la página actual a la nueva página
+function redirectToLoginCliente() {
       window.location.href = "/Frontend/Log_In_Cliente.html";
-    } else {
-      // Repetir la misma acción
-      redirectToNewPage();
-    }
   }

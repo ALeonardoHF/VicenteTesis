@@ -2,28 +2,32 @@
 
 const tabla = document.querySelector("#tabla-venta");
 
-if (localStorage.getItem("user") && localStorage.getItem("login")) {
-    axios.get('http://localhost:3002/api/ventas/')
-        .then(function (response) {
-            response.data.forEach(function (dato) {
-                const fila = document.createElement("tr");
-                let total = dato.Total.toFixed(2);
+if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
+    redirectClient();
+} else {
+    if (localStorage.getItem("user") && localStorage.getItem("login")) {
+        axios.get('http://localhost:3002/api/ventas/')
+            .then(function (response) {
+                response.data.forEach(function (dato) {
+                    const fila = document.createElement("tr");
+                    let total = dato.Total.toFixed(2);
 
-                fila.innerHTML = `
+                    fila.innerHTML = `
             <td>${dato.Articulo}</td>
             <td>${dato.Cantidad}</td>
             <td>$ ${dato.Precio}</td>
             <td>$ ${total}</td>
             `;
-                tabla.appendChild(fila);
+                    tabla.appendChild(fila);
 
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
             });
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-} else {
-    redirectToNewPage();
+    } else {
+        redirectToNewPage();
+    }
 }
 
 
@@ -49,8 +53,22 @@ function redirectToMenu() {
     }
 }
 
+function redirectClient() {
+    if (localStorage.getItem("cliente")) {
+        // Cambiar la ubicación de la página actual a la nueva página
+        logOutCliente();
+        window.location.href = "/Frontend/Log_In_Cliente.html";
+    }
+}
+
 function logOut() {
     localStorage.removeItem("user");
     localStorage.removeItem("login");
-    window.location.reload();
+    window.location.href = "/Frontend/Log In Empleado.html";
+}
+
+function logOutCliente() {
+    localStorage.removeItem("cliente");
+    localStorage.removeItem("loginCliente");
+    // window.location.reload();
 }

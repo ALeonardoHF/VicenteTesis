@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Inicio de Sesión</title>
   <style>
@@ -10,7 +11,7 @@
       align-items: center;
       height: 100vh;
     }
-    
+
     /* Estilos para el formulario */
     form {
       border: 1px solid #ccc;
@@ -20,13 +21,14 @@
       width: 400px;
       position: relative;
     }
-    
+
     label {
       display: block;
       margin-bottom: 10px;
     }
-    
-    input[type="email"], input[type="password"] {
+
+    input[type="email"],
+    input[type="password"] {
       width: 100%;
       padding: 10px;
       margin-bottom: 20px;
@@ -34,7 +36,7 @@
       border-radius: 5px;
       box-sizing: border-box;
     }
-    
+
     input[type="submit"] {
       background-color: #4CAF50;
       color: white;
@@ -43,12 +45,13 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    
-    .new-account, .forgot-password {
+
+    .new-account,
+    .forgot-password {
       margin-top: 20px;
       text-align: center;
     }
-    
+
     .back-button {
       position: absolute;
       top: 20px;
@@ -56,11 +59,12 @@
     }
   </style>
 </head>
+
 <body>
   <div class="back-button">
-    <button onclick="window.history.back()">Regresar</button>
+    <button onclick="window.location.href = '/Frontend/Home.html'">Regresar</button>
   </div>
-  <form method>
+  <form id="clienteLogin">
     <h2>Iniciar Sesión</h2>
     <label for="email">Correo electrónico:</label>
     <input type="email" id="email" name="email" required>
@@ -74,5 +78,10 @@
       <a href="#">¿Olvidaste tu contraseña?</a>
     </div>
   </form>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- <script src="/Frontend/scripts/Cliente.js"></script> -->
+  <script src="/Frontend/scripts/LoginCliente.js"></script>
 </body>
+
 </html>

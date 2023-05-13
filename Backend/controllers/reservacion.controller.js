@@ -4,6 +4,7 @@ const sequelize = require('sequelize');
 const db = require("../models");
 const Cliente = db.cliente;
 const Reservacion = db.reservacion;
+const Registro = db.registro;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
@@ -38,7 +39,11 @@ exports.create = async (req, res) => {
     CodigoAuth: codigoAuth,
     Telefono: req.body.telefono,
     clienteIdCliente: clienteExiste.dataValues.idCliente,
-    Huespedes: req.body.huespedes
+    Huespedes: req.body.huespedes,
+    ModeloAuto: "Actualizar",
+    Matricula: "Actualizar",
+    TipoReservacion: "En Linea",
+    NumHabitacion: 0,
   };
 
   // Save Tutorial in the database
@@ -53,8 +58,6 @@ exports.create = async (req, res) => {
       });
     });
 }
-
-
 
 exports.findAllClient = (req, res) => {
   const id = req.params.id;
@@ -78,6 +81,21 @@ exports.findAllEmpleado = (req, res) => {
   Reservacion.findAll()
       .then(data => {
         // console.log('data :>> ', data);
+          res.send(data);
+      })
+      .catch(err => {
+          res.status(500).send({
+              message:
+                  err.message || "Some error occurred while retrieving tutorials."
+          });
+      });
+};
+
+exports.findLocal = (req, res) => {
+
+  Registro.findAll()
+      .then(data => {
+        console.log('data :>> ', data);
           res.send(data);
       })
       .catch(err => {

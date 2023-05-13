@@ -56,55 +56,84 @@
 </head>
 
 <body>
-		<button onclick="logOut()">Cerrar Sesión</button>
+	<button onclick="logOut()">Cerrar Sesión</button>
 	<div class="container">
 		<h1>Administrador</h1>
+		<button class="btn" id="registros" onclick="checkValue(event)">Reservación VicMar</button>
 		<button class="btn" id="reservaciones" onclick="checkValue(event)">Reservaciones</button>
 		<button class="btn" id="ventas" onclick="checkValue(event)">Ventas</button>
 		<button class="btn" id="inventario" onclick="checkValue(event)">Inventario</button>
 		<button class="btn" id="buscador" onclick="checkValue(event)">Buscador de contacto</button>
-        <button class="btn" id="alta" onclick="checkValue(event)">Alta empleados</button>
+		<button class="btn" id="alta" onclick="checkValue(event)">Alta empleados</button>
 	</div>
 
 
 
 	<script>
-        const empleado = localStorage.getItem("user");
-        const empleadoJSON = JSON.parse(empleado);
-		if (localStorage.getItem("user") && localStorage.getItem("login") && empleadoJSON.Rol === "Administrador") {
-			function checkValue(event) {
-				const bId = event.target.id;
-				switch (bId) {
-					case 'reservaciones':
-						window.location.href = "./Reservaciones_Empleado.html";
-						break;
-					case 'ventas':
-						window.location.href = "./Punto de venta.html";
-						break;
-					case 'inventario':
-						window.location.href = "./Inventario.html";
-						break;
-					case 'buscador':
-						window.location.href = "./Buscador.html";
-						break;
-                    case 'alta':
-						window.location.href = "./Interfaz_alta_empleado.html";
-						break;
-				}
-			}
+		const empleado = localStorage.getItem("user");
+		const empleadoJSON = JSON.parse(empleado);
+		if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
+			redirectClient();
 		} else {
-			redirectToNewPage();
+			if (localStorage.getItem("user") && localStorage.getItem("login") && empleadoJSON.Rol === "Administrador") {
+				function checkValue(event) {
+					const bId = event.target.id;
+					switch (bId) {
+						case 'registros':
+						window.location.href = "./Registros.html";
+						break;
+						case 'reservaciones':
+							window.location.href = "./Reservaciones_Empleado.html";
+							break;
+						case 'ventas':
+							window.location.href = "./Punto de venta.html";
+							break;
+						case 'inventario':
+							window.location.href = "./Inventario.html";
+							break;
+						case 'buscador':
+							window.location.href = "./Buscador.html";
+							break;
+						case 'alta':
+							window.location.href = "./Interfaz_alta_empleado.html";
+							break;
+					}
+				}
+			} else {
+				logOut();
+				logOutCliente();
+				redirectToNewPage();
+			}
 		}
-
 		function redirectToNewPage() {
 			window.location.href = "/Frontend/Log In Empleado.html";
 
 		}
 
+		function redirectClient() {
+			if (localStorage.getItem("cliente")) {
+				// Cambiar la ubicación de la página actual a la nueva página
+				logOutCliente();
+				window.location.href = "/Frontend/Log_In_Cliente.html";
+			}
+		}
+
 		function logOut() {
 			localStorage.removeItem("user");
 			localStorage.removeItem("login");
-			window.location.reload();
+			window.location.href = "/Frontend/Log In Empleado.html";
+		}
+
+		function logOutCliente() {
+			localStorage.removeItem("cliente");
+			localStorage.removeItem("loginCliente");
+			// window.location.reload();
+		}
+
+		// Verifica si la variable logIn no existe en el localStorage
+		if (!localStorage.getItem('login')) {
+			// Redirige al usuario a una página de inicio de sesión o a una página de acceso no autorizado
+			window.location.href = "/Frontend/Home.html";
 		}
 	</script>
 </body>
