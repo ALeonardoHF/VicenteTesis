@@ -205,6 +205,27 @@
 			"response": []
 		},
 		{
+			"name": "GetRegistros",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/api/registros/local",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"api",
+						"registros",
+						"local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "PostEmpleado",
 			"request": {
 				"method": "POST",
@@ -241,7 +262,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Test1\",\r\n    \"email\": \"test1@test.com\",\r\n    \"password\": \"test123\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Test19\",\r\n    \"email\": \"test91@test.com\",\r\n    \"password\": \"test123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -364,7 +385,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Chesquito\",\r\n    \"precio\": 18,\r\n    \"cantidad\": 2,\r\n    \"venta\": true\r\n    \r\n}",
+					"raw": "{\r\n    \"nombre\": \"Chesquito\",\r\n    \"precio\": null,\r\n    \"cantidad\": 2,\r\n    \"venta\": false\r\n    \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
