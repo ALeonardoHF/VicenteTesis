@@ -82,6 +82,13 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <!-- <script src="/Frontend/scripts/Cliente.js"></script> -->
   <script src="/Frontend/scripts/LoginCliente.js"></script>
+  <script>
+    if(localStorage.getItem("login")) {
+      window.location.href = "/Frontend/Interfaz Empleado.html";
+    } else if(localStorage.getItem("loginCliente")) {
+      window.location.href = "/Frontend/Interfaz Cliente.html";
+    }
+  </script>
 </body>
 
 </html>

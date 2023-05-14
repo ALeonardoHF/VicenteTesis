@@ -1,6 +1,7 @@
 const sequelize = require('sequelize');
 const db = require("../models");
 const Venta = db.venta;
+const Inventario = db.inventario;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
@@ -21,37 +22,50 @@ exports.create = (req, res) => {
     Cantidad: req.body.cantidad
   };
 
-  // Save Tutorial in the database
-  Venta.create(venta)
+  Inventario.findOne({ where: { Nombre: req.body.articulo } })
     .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating Empleado."
-      });
+      if (data) {
+        if (req.body.cantidad <= data.dataValues.Cantidad) {
+          const inventario = {
+            Cantidad: data.dataValues.Cantidad - req.body.cantidad
+          }
+          Inventario.update(inventario, { where: { Nombre: req.body.articulo } });
+          // Save Tutorial in the database
+          Venta.create(venta)
+            .then(data => {
+              res.send(data);
+            })
+            .catch(err => {
+              res.status(500).send({
+                message:
+                  err.message || "Some error occurred while creating Empleado."
+              });
+            });
+        } else {
+          return res.status(406).send({ msg: "No hay suficiente producto." });
+        }
+      }
     });
 }
 
 // Retrieve all Tutorials from the database.
 // No se usa porque son diferentes usuarios
 exports.findAll = (req, res) => {
-    
+
   // const title = req.query.title;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-  Venta.findAll({attributes: ['Articulo', 'Precio', 'Cantidad', [sequelize.literal('Precio*Cantidad'), 'Total']]})
-      .then(data => {
-        // console.log('data :>> ', data);
-          res.send(data);
-      })
-      .catch(err => {
-          res.status(500).send({
-              message:
-                  err.message || "Some error occurred while retrieving tutorials."
-          });
+  Venta.findAll({ attributes: ['Articulo', 'Precio', 'Cantidad', [sequelize.literal('Precio*Cantidad'), 'Total']] })
+    .then(data => {
+      // console.log('data :>> ', data);
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
       });
+    });
 };
 
 // Find a single Tutorial with an id

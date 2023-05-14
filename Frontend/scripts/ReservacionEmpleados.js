@@ -10,6 +10,8 @@ const clienteJSON = JSON.parse(cliente);
 const user = localStorage.getItem("user");
 const login = localStorage.getItem("login");
 
+var idReservacionLocal, idReservacionLinea;
+
 if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
     redirectClient();
 } else {
@@ -57,8 +59,12 @@ if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
                 <td>${dato.CodigoAuth}</td>
                 <td>${dato.Telefono}</td>
                 <td>${dato.Huespedes}</td>
+                <td>${dato.ModeloAuto}</td>
+                <td>${dato.Matricula}</td>
+                <td>${dato.NumHabitacion}</td>
                 <td>$ ${dato.Precio}</td>
                 <td>${caducidad}</td>
+                <td><button value="${dato.idReservacion}" onclick="actualizarLinea(event)">Actualizar</button></td>
                 `;
 
                     tabla.appendChild(fila);
@@ -69,11 +75,10 @@ if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
                 console.log(error);
             });
 
-            // segundo accios tabla local
-            axios.get(`http://localhost:3002/api/registros/local`)
+        // segundo accios tabla local
+        axios.get(`http://localhost:3002/api/registros/local`)
             .then(function (response) {
                 response.data.forEach(function (dato) {
-
                     const fechaIn = new Date(dato.CheckIn);
                     const fechaOut = new Date(dato.CheckOut);
 
@@ -113,8 +118,12 @@ if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
                 <td>${dato.CodigoAuth}</td>
                 <td>${dato.Telefono}</td>
                 <td>${dato.Huespedes}</td>
+                <td>${dato.ModeloAuto}</td>
+                <td>${dato.Matricula}</td>
+                <td>${dato.NumHabitacion}</td>
                 <td>$ ${dato.Precio}</td>
                 <td>${caducidad}</td>
+                <td><button value="${dato.idReservacion}" onclick="actualizarLocal(event)">Actualizar</button></td>
                 `;
 
                     tablaRegistros.appendChild(fila);
@@ -124,7 +133,7 @@ if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
             .catch(function (error) {
                 console.log(error);
             });
-            
+
     } else {
         redirectToNewPage();
     }
@@ -172,4 +181,73 @@ function logOutCliente() {
 
 function reload() {
     window.location.reload();
+}
+
+// Función para abrir el modal
+function actualizarLocal(event) {
+    idReservacionLocal = event.target.value;
+    var modal = document.getElementById("modalActualizarDatosLocal");
+    modal.showModal(); // Muestra el modal
+}
+
+function actualizarLinea(event) {
+    idReservacionLinea = event.target.value;
+    var modal = document.getElementById("modalActualizarDatosLinea");
+    modal.showModal(); // Muestra el modal
+}
+
+// Función para cerrar el modal
+function cerrarModalLinea() {
+    var modal = document.getElementById("modalActualizarDatosLinea");
+    modal.close(); // Cierra el modal
+}
+
+function cerrarModalLocal() {
+    var modal = document.getElementById("modalActualizarDatosLocal");
+    modal.close(); // Cierra el modal
+}
+
+// Función para actualizar el dato
+function actualizarDatoLocal() {
+    var modeloAuto = document.getElementById("modeloAutoL").value;
+    var matricula = document.getElementById("matriculaL").value;
+    var numHabitacion = document.getElementById("numHabitacionL").value;
+    var idReservacion = idReservacionLocal;
+
+    // Aquí puedes hacer lo necesario para actualizar el dato, por ejemplo, enviar una solicitud HTTP al servidor
+    axios.post(`http://localhost:3002/api/registros/actualizar/${idReservacion}`, {
+        modeloAuto: modeloAuto,
+        matricula: matricula,
+        numHabitacion: numHabitacion
+    })
+        .then(function (response) {
+             console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    window.location.reload();
+    cerrarModalLocal(); // Cierra el modal después de actualizar el dato
+}
+
+function actualizarDatoLinea() {
+    var modeloAuto = document.getElementById("modeloAuto").value;
+    var matricula = document.getElementById("matricula").value;
+    var numHabitacion = document.getElementById("numHabitacion").value;
+    var idReservacion = idReservacionLinea;
+
+    // Aquí puedes hacer lo necesario para actualizar el dato, por ejemplo, enviar una solicitud HTTP al servidor
+    axios.post(`http://localhost:3002/api/reservaciones/actualizar/${idReservacion}`, {
+        modeloAuto: modeloAuto,
+        matricula: matricula,
+        numHabitacion: numHabitacion
+    })
+        .then(function (response) {
+             console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    window.location.reload();
+    cerrarModalLinea(); // Cierra el modal después de actualizar el dato
 }

@@ -47,7 +47,7 @@ module.exports = app => {
   // router.get("/inventarios/:nombre", inventarios.findOne);
 
   // Update a Tutorial with id
-  // router.put("/inventarios/:id", inventarios.update);
+  router.post("/inventarios/actualizar/:productoId", inventarios.update);
 
   // Delete a Tutorial with id
   // router.delete("/inventarios/:id", inventarios.delete);
@@ -122,6 +122,9 @@ module.exports = app => {
   // Retrieve all Reservaciones en linea Empleado
   router.get("/reservaciones", reservaciones.findAllEmpleado);
 
+  // Actualizar reservacion
+  router.post("/reservaciones/actualizar/:idReservacion", reservaciones.update);
+
   //////////////////////////////////////////////////////////////////////////////////////////////
   // Registros
   //////////////////////////////////////////////////////////////////////////////////////////////
@@ -133,6 +136,9 @@ module.exports = app => {
 
   // Retrieve all Reservaciones locales Empleado
   router.get("/registros/local", registros.findAll);
+
+  // Actualizar reservacion
+  router.post("/registros/actualizar/:idReservacion", registros.update);
 
   //////////////////////////////////////////////////////////////////////////////////////////////
   // Login

@@ -7,8 +7,8 @@ module.exports = (sequelize, Sequelize) => {
       },
       Nombre: {
         type: Sequelize.STRING,
-        allowNull: false
-        
+        allowNull: false,
+        unique: true
       },
       Precio: {
         type: Sequelize.INTEGER,

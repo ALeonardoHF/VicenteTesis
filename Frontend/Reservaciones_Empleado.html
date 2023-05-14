@@ -52,8 +52,12 @@
                 <th>Codigo Autorización</th>
                 <th>Teléfono</th>
                 <th>Huespedes</th>
+                <th>Modelo de Auto</th>
+                <th>Matrícula</th>
+                <th>Número de habitación</th>
                 <th>Precio</th>
                 <th>Reservación Válida</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody id="tabla-reservaciones">
@@ -72,14 +76,46 @@
                 <th>Codigo Autorización</th>
                 <th>Teléfono</th>
                 <th>Huespedes</th>
+                <th>Modelo de Auto</th>
+                <th>Matrícula</th>
+                <th>Número de habitación</th>
                 <th>Precio</th>
                 <th>Reservación Válida</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody id="tabla-registros">
             <!-- Se insetaran los registros de la base de datos dinamicamente -->
         </tbody>
     </table>
+
+<dialog id="modalActualizarDatosLinea">
+  <form>
+    <label for="modeloAuto">Modelo de Auto:</label>
+    <input type="text" id="modeloAuto" name="modeloAuto">
+    <label for="matricula">Matrícula:</label>
+    <input type="text" id="matricula" name="matricula">
+    <label for="numHabitacion">Número de habitación:</label>
+    <input type="number" id="numHabitacion" name="numHabitacion" min="1" max="15">
+    <button type="button" onclick="actualizarDatoLinea()">Actualizar</button>
+    <button type="button" onclick="cerrarModalLinea()">Cancelar</button>
+  </form>
+</dialog>
+
+<dialog id="modalActualizarDatosLocal">
+    <form>
+      <label for="modeloAuto">Modelo de Auto:</label>
+      <input type="text" id="modeloAutoL" name="modeloAuto">
+      <label for="matricula">Matrícula:</label>
+      <input type="text" id="matriculaL" name="matricula">
+      <label for="numHabitacion">Número de habitación:</label>
+      <input type="number" id="numHabitacionL" name="numHabitacion" min="1" max="15">
+      <button type="button" onclick="actualizarDatoLocal()">Actualizar</button>
+      <button type="button" onclick="cerrarModalLocal()">Cancelar</button>
+    </form>
+  </dialog>
+
+</body>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/Frontend/scripts/ReservacionEmpleados.js"></script>
     <script>
@@ -95,6 +131,6 @@
       </script>
     <!-- <script src="/Frontend/scripts/RegistrosEmpleados.js"></script> -->
     <!-- <script src="/Frontend/scripts/ConexionApiReservaciones.js"></script> -->
-</body>
+
 
 </html>

@@ -68,13 +68,24 @@
         <th>Producto</th>
         <th>Cantidad</th>
         <th>Precio Unidad</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody id="tabla-inventario">
       <!-- Se insetaran los registros de la base de datos dinamicamente -->
     </tbody>
   </table>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  
+  <dialog id="modalActualizarDatos">
+    <form>
+      <label for="cantidadModal">Cantidad:</label>
+      <input type="number" id="cantidadModal" name="cantidadModal" min="1">
+      <button type="button" onclick="actualizarDato()">Actualizar</button>
+      <button type="button" onclick="cerrarModal()">Cancelar</button>
+    </form>
+  </dialog>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="/Frontend/scripts/Inventario.js"></script>
   <script src="/Frontend/scripts/ConexionApiInventario.js"></script>
   <script>
@@ -84,6 +95,4 @@
 			window.location.href = "/Frontend/Home.html";
 		}
   </script>
-</body>
-
 </html>

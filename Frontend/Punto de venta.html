@@ -22,6 +22,7 @@
   <body>
     <div class="navbar">
       <button onclick="redirectToMenu()">Menu</button>
+      <button onclick="abrirModal()">Inventario busqueda</button>
       <button id="cerrarSesion" onclick="logOut()">Cerrar Sesión</button>
     </div>
     <h1>Punto de venta - Tienda de souvenirs</h1>
@@ -31,7 +32,7 @@
       <label for="cantidad">Cantidad:</label>
       <input type="number" id="cantidad" name="cantidad" min="1"><br><br>
       <label for="precio">Precio unitario:</label>
-      <input type="number" id="precio" name="precio" min="0.01" step="0.01"><br><br>
+      <input type="number" id="precio" name="precio" min="1" step="1"><br><br>
       <button type="submit" >Agregar</button>
     </form>
     <table>
@@ -47,6 +48,23 @@
         
       </tbody>
     </table>
+
+    <dialog id="modalPuntoVenta">
+      <button onclick="cerrarModal()">Cerrar</button>
+      <table id="tablaInventario" border="1">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-inventario">
+          <!-- Se insetaran los registros de la base de datos dinamicamente -->
+        </tbody>
+      </table>
+    </dialog>
   </body>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="/Frontend/scripts/Venta.js"></script>

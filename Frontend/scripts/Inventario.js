@@ -6,6 +6,7 @@
 const tabla = document.querySelector("#tabla-inventario");
 const empleado = localStorage.getItem("user");
 const empleadoJSON = JSON.parse(empleado);
+var productoId;
 
 if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
     redirectClient();
@@ -24,6 +25,7 @@ if (localStorage.getItem("cliente") || localStorage.getItem("user") == null) {
             <td>${dato.Nombre}</td>
             <td>${dato.Cantidad}</td>
             <td>${dato.Precio}</td>
+            <td><button value="${dato.productoId}" onclick="actualizar(event)">Actualizar</button></td>
             `;
                     tabla.appendChild(fila);
 
@@ -77,4 +79,34 @@ function logOutCliente() {
     localStorage.removeItem("cliente");
     localStorage.removeItem("loginCliente");
     // window.location.reload();
+}
+
+// Función para abrir el modal
+function actualizar(event) {
+    productoId = event.target.value;
+    var modal = document.getElementById("modalActualizarDatos");
+    modal.showModal(); // Muestra el modal
+}
+
+// Función para cerrar el modal
+function cerrarModal() {
+    var modal = document.getElementById("modalActualizarDatos");
+    modal.close(); // Cierra el modal
+}
+
+// Función para actualizar el dato
+function actualizarDato() {
+  var cantidad = document.getElementById("cantidadModal").value;
+    // Aquí puedes hacer lo necesario para actualizar el dato, por ejemplo, enviar una solicitud HTTP al servidor
+    axios.post(`http://localhost:3002/api/inventarios/actualizar/${productoId}`, {
+        cantidad: cantidad,
+    })
+        .then(function (response) {
+             console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    window.location.reload();
+    cerrarModal(); // Cierra el modal después de actualizar el dato
 }

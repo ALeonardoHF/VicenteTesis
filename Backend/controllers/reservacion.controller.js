@@ -91,17 +91,22 @@ exports.findAllEmpleado = (req, res) => {
       });
 };
 
-exports.findLocal = (req, res) => {
+// Update a Tutorial by the id in the request
+exports.update = (req, res) => {
+  const idReservacion = req.params.idReservacion;
+  
+  const reservacion = {
+    ModeloAuto: req.body.modeloAuto,
+    Matricula: req.body.matricula,
+    NumHabitacion: req.body.numHabitacion
+  }
 
-  Registro.findAll()
-      .then(data => {
-        console.log('data :>> ', data);
-          res.send(data);
-      })
-      .catch(err => {
-          res.status(500).send({
-              message:
-                  err.message || "Some error occurred while retrieving tutorials."
-          });
+  Reservacion.update(reservacion, {
+    where: { idReservacion: idReservacion }
+  })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Reservacion with id=" + idReservacion
       });
+    });
 };

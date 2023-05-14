@@ -43,10 +43,6 @@ exports.crearRegistro = async (req, res) => {
     });
 }
 
-
-
-
-
 exports.findAll = (req, res) => {
     Registro.findAll()
     .then(data => {
@@ -59,3 +55,23 @@ exports.findAll = (req, res) => {
         });
     });
 }
+
+// Update a Tutorial by the id in the request
+exports.update = (req, res) => {
+  const idReservacion = req.params.idReservacion;
+  
+  const registro = {
+    ModeloAuto: req.body.modeloAuto,
+    Matricula: req.body.matricula,
+    NumHabitacion: req.body.numHabitacion
+  }
+
+  Registro.update(registro, {
+    where: { idReservacion: idReservacion }
+  })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Registro with id=" + idReservacion
+      });
+    });
+};

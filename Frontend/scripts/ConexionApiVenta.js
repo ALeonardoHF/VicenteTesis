@@ -8,11 +8,6 @@ form.addEventListener('submit', function (event) {
   const precio = document.getElementById('precio').value;
   const cantidad = document.getElementById('cantidad').value;
 
-  console.log(articulo);
-  console.log(tipoarticulo);
-  console.log(precio);
-  console.log(cantidad);
-
   // Realizar la petición a través de Axios
   axios.post('http://localhost:3002/api/ventas/', {
     articulo: articulo,
@@ -21,10 +16,13 @@ form.addEventListener('submit', function (event) {
     cantidad: cantidad
   })
     .then(function (response) {
-      console.log(response);
+      if (response.status == 200) {
+        location.reload();
+      }
     })
     .catch(function (error) {
-      console.log(error);
+      alert("Error, no existe el producto o la cantidad de venta supera el del inventario.");
     });
-    location.reload();
+    form.reset(); 
+  // location.reload();
 });
